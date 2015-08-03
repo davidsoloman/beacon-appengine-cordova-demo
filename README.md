@@ -1,5 +1,5 @@
 # beacon-appengine-cordova-demo
-This repository contains code that can be used to build a suite of demo apps which persist and interact with beacon data. 
+This repository contains code that can be used to build a suite of demo apps which persist and interact with beacon data. AltBeacon and iBeacon are supported by default, adding support for Eddystone-UID and other beacon formats would be a fairly simple exercise.
 
 The demo suite is composed of three apps:
 
@@ -9,7 +9,22 @@ The demo suite is composed of three apps:
 
 3) beacon-app - a Cordova app that loads any beacons added via the admin app. On encountering a beacon the app will display whatever message the user entered against the beacon in the admin app; this could obviously be extended to handle other types of interaction, such as showing an image or playing a video.
 
-Please see the further instructions and known issues below before raising any issues against this repository.
+*** Getting started.
+
+If you're comfortable working with Cordova and with Google app engine then you probably already have your own workflow and can comfortably skip this part. If not, then walking throught the following instructions should get you up and running.
+
+1) You'll need to install Eclipse, along with the Google plugin. The plugin officially supports versions up to Luna ( download the Java EE version here: https://eclipse.org/downloads/packages/release/Luna/SR2). Installation is mainly point and click, but full instructions on installing Eclipse can be found here: https://wiki.eclipse.org/Eclipse/Installation#Eclipse_4.4_.28Luna.29  
+Instructions on getting the plugin are here https://developers.google.com/eclipse/docs/download
+
+2) Next, you'll create a new app engine application - instructions are on the Google developer's site, here: https://developers.google.com/eclipse/docs/appengine.
+
+3) Copy the 2 java classes from bbepoc into your Eclipse project's /src directory, right click on the project in eclipse and select "Google" then "Deploy to App Engine" from the pop up menu.
+
+4) You'll need to run the Cordova apps on a mobile device. You have options here, but I find EvoThings the quickest and most convenient way of doing this. Install EvoThings by following the instructions here: http://evothings.com/download/
+
+5) Once EvoThings is installed on your PC or Mac, you've installed the client on your mobile device and you've connected the client app to EvoThings Workbench, you're ready to try out the Cordova apps. Download the source of admin-app and beacon-app to your development machine and navigate to the index.html file of the app you'd like to try first - I recommend starting with the admin app, as the beacon app won't do much without beacon data. Drag the index.html file into the EvoThings Workbench window to register the app with EvoThings and then click "Run" to launch the app. You should see the app loading and then running on your device (ensure Bluetooth is enabled if you're running the beacon app, or it won't detect any beacons).
+
+Feel free to raise an issue on this repository if these instructions don't work for you and I'll look at elaborating them if required, but please see the further instructions and known issues below first.
 
 *** You'll need to make changes in a few files before you can get up and running:
 
