@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0" />
+
+        <title>beaconate : Beacon Manager</title>
+ 	
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../lib/flatui/jquery.mobile.flatui.css" />
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.min.js"></script>
+    
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script> 
+            
+        <script>
+            // Redirect console if running from Evothings Workbench.
+            if (window.hyper) { console.log = hyper.log }
+        </script>
+        
+    </head>
+
+    <body>
+    
+        <div id="page-welcome" 
+         	 data-role="page">
+    
+            <div data-role="header" 
+		 data-position="fixed">
+            
+        	<div data-role="navbar">
+                    <ul>
+                	<li><a href="#page-welcome" 
+                	           data-icon="home">Manage Beacons</a></li>
+                    </ul>
+            	</div>
+
+            </div>
+		        
+            <div data-role="content">
+                <p class="ui-bar ui-bar-a">Welcome to Beacon Manager</p>
+                <a href="#page-beacon-list" class="ui-shadow ui-btn ui-corner-all ui-btn-b">View Beacons</a>
+            </div>
+                
+            <div align="center" 
+                 data-role="footer" 
+                 data-position="fixed">(c) beaconate 2015
+            </div>
+                
+	</div>		
+	
+	<!-- *** Beacons *** --> 
+		
+        <div id="page-beacon-list" 
+             data-role="page">
+    
+            <div data-role="header" 
+		 data-position="fixed">
+            
+                <div data-role="navbar">
+                    <ul>
+                	<li><a href="#page-welcome" 
+                	       data-icon="home">Manage Beacons</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+		        
+            <div data-role="content">
+
+                <p class="ui-bar ui-bar-a">Manage your Beacons</p>
+
+                <div class="ui-grid-b ui-responsive" data-bind="foreach: beacons">
+                    <div class="ui-block-a">
+                        <span>
+                            <a class="ui-shadow ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline ui-btn-b" 
+                               href="#"
+                               data-bind="click: $parent.editBeacon">Edit</a>
+                            <a class="ui-shadow ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-btn-b" 
+                               href="#page-beacon-list"
+                               data-bind="click: $parent.removeBeacon">Delete</a>
+                            <strong data-bind="text: label"></strong>
+                        </span>
+                    </div>
+                </div>
+
+                <span><strong data-bind="visible: beacons().length == 0">There are no Beacons set up</strong></span>
+
+                <div>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-check ui-btn-b" 
+                       href="#page-beacon-detail"
+                       data-bind="click: createNewBeacon">New Beacon</a>
+                    <a href="#page-welcome" 
+                       class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-b">Cancel</a>
+                </div>
+
+            </div>
+                
+            <div align="center" 
+                 data-role="footer" 
+                 data-position="fixed">
+                (c) beaconate 2015
+            </div>
+                
+	</div>		
+	
+	<div id="page-beacon-detail" 
+	     data-role="page">
+    
+            <div data-role="header" 
+		 data-position="fixed">
+            
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page-welcome" 
+                           data-icon="home">Manage Beacons</a></li>
+                </ul>
+            </div>
+
+        </div>
+		        
+        <div data-role="content">
+        
+            Beacons > Beacon Details
+            
+            <p class="ui-bar ui-bar-a">Beacon Details</p>
+
+            <div>
+				
+                <label for="ta-beacon-label">Give your beacon a label:</label>
+                <input name="ta-beacon-label" 
+                       id="ta-beacon-label" 
+                       type="text"
+                       data-bind="value: label">
+               
+                <label for="ta-beacon-description">Beacon description (optional):</label>
+                <textarea name="ta-beacon-description" 
+                          id="ta-beacon-description" 
+                          rows="8" 
+                          cols="40"
+                          data-bind="value: description"></textarea>
+
+                <label for="sel-beacon-type">Beacon type:</label>
+                <select name="sel-beacon-type" 
+                        id="sel-beacon-type"
+                        data-bind="value: type">
+                        <option value="iBeacon">iBeacon</option>
+                        <option value="AltBeacon">AltBeacon</option>
+                </select>
+
+                <label for="ta-beacon-uuid">UUID:</label>
+                <input name="ta-beacon-uuid" 
+                       type="text" 
+                       id="ta-beacon-uuid"
+                       data-bind="value: uuid">
+
+                <label for="ta-beacon-major">Major ID:</label>
+                <input name="ta-beacon-major" 
+                       type="text" 
+                       id="ta-beacon-major"
+                       data-bind="value: major">
+
+                <label for="ta-beacon-minor">Minor ID:</label>
+                <input name="ta-beacon-minor" 
+                       type="text" 
+                       id="ta-beacon-minor"
+                       data-bind="value: minor">
+
+                <label for="ta-beacon-message">Message to be displayed (note - can be raw HTML):</label>
+                <textarea name="ta-beacon-message" 
+                          id="ta-beacon-message" 
+                          rows="40" 
+                          cols="80"
+                          data-bind="value: message"></textarea>
+
+                <a href="#page-beacon-list" 
+                   class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-check ui-btn-b" 
+                   data-bind="click: save">Save</a>
+                <a href="#page-beacon-list" 
+                   class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-b">Cancel</a>		
+
+                </div>
+			
+            </div>
+                
+            <div align="center" 
+                 data-role="footer" 
+                 data-position="fixed">
+	 		(c) beaconate 2015
+            </div>
+                
+	</div>
+	
+	<script src="https://apis.google.com/js/client.js?onload=init">
+            { "client": {},
+                "googleapis.config": {
+                    root: "https://*** YOUR APP ID ***.appspot.com/_ah/api"
+                }
+            }
+	</script>
+	
+	<script>
+            $('#page-beacon-list').on('pagebeforeshow', function() {
+                console.log("*** Calling beaconsViewModel.load");
+                beaconsViewModel.load();
+            });
+
+            $('#page-beacon-detail').on('pagebeforeshow', function() {
+                console.log("*** Calling beaconViewModel.load");
+                beaconViewModel.load();
+            });
+  	</script>
+  	
+  	<script type="text/javascript" src="../js/app.js"></script> 
+  	
+    </body>
+    
+</html>
