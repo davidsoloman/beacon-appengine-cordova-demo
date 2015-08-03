@@ -1,6 +1,8 @@
 # beacon-appengine-cordova-demo
 This repository contains code that can be used to build a suite of demo apps which persist and interact with beacon data. AltBeacon and iBeacon are supported by default, adding support for Eddystone-UID and other beacon formats would be a fairly simple exercise.
 
+See my blog post at http://justins-tech.blogspot.co.uk/2015/08/end-to-end-ibeacon-demo-featuring.html for more on the intent behind this demo.
+
 The demo suite is composed of three apps:
 
 1) admin-app - a Cordova app that allows a user to capture data representing a fleet of beacons and save it to persistent storage. Storage in this case is handled by Google app engine, with a Cloud Endpoint providing the API.
