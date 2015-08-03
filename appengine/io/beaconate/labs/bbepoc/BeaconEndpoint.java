@@ -1,6 +1,6 @@
-package io.beaconate.labs.objbbepoc;
+package io.beaconate.labs.bbepoc;
 
-import io.beaconate.labs.objbbepoc.PMF;
+import io.beaconate.labs.bbepoc.PMF;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -19,7 +19,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-@Api(name = "beaconendpoint", namespace = @ApiNamespace(ownerDomain = "beaconate.io", ownerName = "beaconate.io", packagePath = "labs.objbbepoc"))
+@Api(name = "beaconendpoint", namespace = @ApiNamespace(ownerDomain = "beaconate.io", ownerName = "beaconate.io", packagePath = "labs.bbepoc"))
 public class BeaconEndpoint {
 
 	/**

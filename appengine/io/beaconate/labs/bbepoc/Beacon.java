@@ -1,4 +1,4 @@
-package io.beaconate.labs.objbbepoc;
+package io.beaconate.labs.bbepoc;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
